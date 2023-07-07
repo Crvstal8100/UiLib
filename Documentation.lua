@@ -14,7 +14,7 @@ local Button = Tab:CreateButton(name: string, callback: function)
 local Toggle = Tab:CreateToggle(name: string, state: bool, callback: function)
 
 -- Create TextBox
-local TextBox = Tab:CreateTextBox(placeholder: string, text: string, callback: function)
+local TextBox = Tab:CreateTextBox(placeholder: string, callback: function)
 
 -- Create Slider
 local Slider = Tab:CreateSlider(name: string, minvalue: number, maxvalue: number, callback:function)
