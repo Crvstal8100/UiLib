@@ -1,11 +1,9 @@
 local Library = {} 
-
-function Library.Create(Name)
-
+function Library:Create(Name)
 	local CsgoFunny = Instance.new("ScreenGui")
 
 	CsgoFunny.Name = Name
-	CsgoFunny.Parent = game.Players.LocalPlayer.PlayerGui
+	CsgoFunny.Parent = game.CoreGui
 	CsgoFunny.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	local Frame = Instance.new("Frame")
@@ -114,7 +112,7 @@ function Library.Create(Name)
 	Tabs.Parent = Buttons
 	Tabs.Name = "Tabs"
 
-	function TabsE.Create(Name)
+	function TabsE:Create(Name)
 		local TextButton = Instance.new('TextButton')
 		TextButton.Parent = TabButtons
 		TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
@@ -189,7 +187,7 @@ function Library.Create(Name)
 		return TabName
 	end
 	
-	function TabsE.CreateButton(tab, name, callback)
+	function TabsE:CreateButton(tab, name, callback)
 		callback = callback or function () end
 
 		local TextButton2 = Instance.new("TextButton")
@@ -218,7 +216,7 @@ function Library.Create(Name)
 		end)
 	end
 
-	function TabsE.CreateToggle(tab, name, state, callback)
+	function TabsE:CreateToggle(tab, name, state, callback)
 		callback = callback or function () end	
 
 		local TextLabel3 = Instance.new("TextLabel")
@@ -262,7 +260,7 @@ function Library.Create(Name)
 		end)
 	end
 
-	function TabsE.CreateTextBox(tab, placeholder, text, callback)
+	function TabsE:CreateTextBox(tab, placeholder, text, callback)
 		callback = callback or function () end
 
 		local TextBox = Instance.new("TextBox")
@@ -288,7 +286,7 @@ function Library.Create(Name)
 		end)
 	end
 
-	function TabsE.CreateSlider(tab, name, minvalue, maxvalue, callback)
+	function TabsE:CreateSlider(tab, name, minvalue, maxvalue, callback)
 		callback = callback or function () end
 
 		local Value
