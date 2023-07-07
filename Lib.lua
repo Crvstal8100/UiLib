@@ -145,7 +145,7 @@ function Library:Create(Name)
 	Tabs.Parent = Buttons
 	Tabs.Name = "Tabs"
 
-	function TabsE:Create(Name)
+	function Library:CreateTab(Name)
 		local TextButton = Instance.new('TextButton')
 		TextButton.Parent = TabButtons
 		TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
