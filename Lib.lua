@@ -2,6 +2,8 @@ local Library = {}
 function Library:Create(Name)
 	local CsgoFunny = Instance.new("ScreenGui")
 
+	local Closed = false
+	
 	CsgoFunny.Name = Name
 	CsgoFunny.Parent = game.CoreGui
 	CsgoFunny.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -22,6 +24,37 @@ function Library:Create(Name)
 	Title.BorderColor3 = Color3.fromRGB(24, 24, 24)
 	Title.BorderSizePixel = 0
 	Title.Size = UDim2.new(0, 400, 0, 40)
+
+	local CloseButton = Instance.new("ImageButton")
+
+	CloseButton.Parent = Title
+	CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	CloseButton.BackgroundTransparency = 1.000
+	CloseButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	CloseButton.BorderSizePixel = 0
+	CloseButton.Position = UDim2.new(0.909999967, 0, 0.100000001, 0)
+	CloseButton.Size = UDim2.new(0, 30, 0, 30)
+	CloseButton.Image = "rbxassetid://9545003266"
+
+	CloseButton.MouseButton1Down:Connect(function()
+		CsgoFunny:Destroy()
+	end)
+
+	game:GetService("UserInputService").InputBegan:Connect(function(input, gpe)
+		if gpe then return end
+
+		if input.UserInputType == Enum.UserInputType.Keyboard then
+			if input.KeyCode == Enum.KeyCode.V then
+				if Closed then
+					CsgoFunny.Enabled = true
+					Closed = false
+				else
+					CsgoFunny.Enabled = false
+					Closed = true
+				end
+			end
+		end
+	end)
 
 	local TitleText = Instance.new("TextLabel")
 
