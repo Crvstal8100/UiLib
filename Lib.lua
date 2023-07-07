@@ -294,7 +294,7 @@ function Library:Create(Name)
 			end)
 		end
 
-		function TabButtons:CreateTextBox(placeholder, text, callback)
+		function TabButtons:CreateTextBox(placeholder, callback)
 			callback = callback or function () end
 
 			local TextBox = Instance.new("TextBox")
@@ -315,7 +315,7 @@ function Library:Create(Name)
 			TextBox.TextTransparency = 0.300
 
 			TextBox.FocusLost:Connect(function()
-				text = TextBox.Text
+				local text = TextBox.Text
 				pcall(callback, text)
 			end)
 		end
