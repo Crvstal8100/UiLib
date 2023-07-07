@@ -257,6 +257,8 @@ function Library:Create(Name)
 			local ImageButton = Instance.new("ImageButton")
 			local UIGradient = Instance.new("UIGradient")
 
+			local toggle = {}
+
 			TextLabel3.Parent = Tab
 			TextLabel3.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 			TextLabel3.BackgroundTransparency = 1.000
@@ -292,6 +294,20 @@ function Library:Create(Name)
 				end
 				pcall(callback, state)
 			end)
+
+			function toggle:GetState()
+				return state
+			end
+
+			function toggle:SetState(bool)
+				bool = bool  or ""
+
+				if bool ~= false and bool ~= true then return end
+				
+				state = bool
+			end
+
+			return toggle
 		end
 
 		function TabButtons:CreateTextBox(placeholder, callback)
@@ -322,7 +338,13 @@ function Library:Create(Name)
 			end)
 
 			function textBox:GetText()
-				return TextBox.Text
+				return state
+			end
+
+			function textBox:SetText(text)
+				text = text  or ""
+				
+				TextBox.Text = text
 			end
 			
 			return textBox
@@ -342,7 +364,7 @@ function Library:Create(Name)
 
 			local TextLabelXDX = Instance.new("TextLabel")
 
-			--Properties:
+			local slider = {}
 
 			TextLabelXDX.Parent = ImageButtonXD
 			TextLabelXDX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -414,7 +436,26 @@ function Library:Create(Name)
 						releaseconnection:Disconnect()
 					end
 				end)
-			end)		
+			end)
+
+			function slider:GetValue()
+				return Value
+			end
+
+			function slider:SetValue(number)
+				number = number  or ""
+
+				if number == "" or number > maxvalue or number < minvalue then return end
+				
+				TextLabelXDX.Text = Value
+				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(number))
+				pcall(function()
+					callback(Value)
+				end)
+				ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
+			end
+
+			return slider
 		end
 
 		return TabButtons
