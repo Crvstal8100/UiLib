@@ -338,7 +338,7 @@ function Library:Create(Name)
 			end)
 
 			function textBox:GetText()
-				return state
+				return TextBox.Text
 			end
 
 			function textBox:SetText(text)
@@ -409,25 +409,22 @@ function Library:Create(Name)
 
 			ImageButtonXD.MouseButton1Down:Connect(function()
 				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue)) or 0
-				pcall(function()
-					callback(Value)
-				end)
+				pcall(callback, Value)
 				ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
 
 				local moveconnection
 				local releaseconnection
 
 				moveconnection = mouse.Move:Connect(function()
-					TextLabelXDX.Text = Value
 					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue))
-					pcall(function()
-						callback(Value)
-					end)
+					TextLabelXDX.Text = Value
+					pcall(callback, Value)
 					ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
 				end)
 				releaseconnection = uis.InputEnded:Connect(function(Mouse)
 					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
 						Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue))
+						TextLabelXDX.Text = Value
 						pcall(function()
 							callback(Value)
 						end)
