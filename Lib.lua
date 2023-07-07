@@ -1,9 +1,11 @@
 local Library = {} 
+
 function Library:Create(Name)
+	
+	local Closed = false
+
 	local CsgoFunny = Instance.new("ScreenGui")
 
-	local Closed = false
-	
 	CsgoFunny.Name = Name
 	CsgoFunny.Parent = game.CoreGui
 	CsgoFunny.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -24,7 +26,7 @@ function Library:Create(Name)
 	Title.BorderColor3 = Color3.fromRGB(24, 24, 24)
 	Title.BorderSizePixel = 0
 	Title.Size = UDim2.new(0, 400, 0, 40)
-
+	
 	local CloseButton = Instance.new("ImageButton")
 
 	CloseButton.Parent = Title
@@ -145,7 +147,7 @@ function Library:Create(Name)
 	Tabs.Parent = Buttons
 	Tabs.Name = "Tabs"
 
-	function Library:CreateTab(Name)
+	function TabsE:Create(Name)
 		local TextButton = Instance.new('TextButton')
 		TextButton.Parent = TabButtons
 		TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
@@ -217,195 +219,197 @@ function Library:Create(Name)
 			end
 		end)
 
-		return TabName
-	end
-	
-	function TabsE:CreateButton(tab, name, callback)
-		callback = callback or function () end
+		local TabButtons = {}
 
-		local TextButton2 = Instance.new("TextButton")
+		function TabButtons:CreateButton(name, callback)
+			callback = callback or function () end
 
-		TextButton2.Parent = tab.Tab
-		TextButton2.AutoButtonColor = false
-		TextButton2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		TextButton2.BorderSizePixel = 0
-		TextButton2.Size = UDim2.new(0, 200, 0, 50)
-		TextButton2.Font = Enum.Font.Code
-		TextButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextButton2.TextSize = 14.000
-		TextButton2.TextWrapped = true
-		TextButton2.Text = name
+			local TextButton2 = Instance.new("TextButton")
 
-		TextButton2.MouseEnter:Connect(function()
-			TextButton2.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
-		end)
-
-		TextButton2.MouseLeave:Connect(function()
+			TextButton2.Parent = Tab
+			TextButton2.AutoButtonColor = false
 			TextButton2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		end)
+			TextButton2.BorderSizePixel = 0
+			TextButton2.Size = UDim2.new(0, 200, 0, 50)
+			TextButton2.Font = Enum.Font.Code
+			TextButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextButton2.TextSize = 14.000
+			TextButton2.TextWrapped = true
+			TextButton2.Text = name
 
-		TextButton2.MouseButton1Click:Connect(function()
-			pcall(callback)
-		end)
-	end
-
-	function TabsE:CreateToggle(tab, name, state, callback)
-		callback = callback or function () end	
-
-		local TextLabel3 = Instance.new("TextLabel")
-		local ImageButton = Instance.new("ImageButton")
-		local UIGradient = Instance.new("UIGradient")
-
-		TextLabel3.Parent = tab.Tab
-		TextLabel3.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		TextLabel3.BackgroundTransparency = 1.000
-		TextLabel3.BorderColor3 = Color3.fromRGB(36, 36, 36)
-		TextLabel3.BorderSizePixel = 0
-		TextLabel3.Position = UDim2.new(0, 0, 0.189873606, 0)
-		TextLabel3.Size = UDim2.new(0, 100, 0, 205)
-		TextLabel3.Font = Enum.Font.Code
-		TextLabel3.Text = name
-		TextLabel3.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel3.TextSize = 14.000
-		TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
-
-		ImageButton.Parent = TextLabel3
-		ImageButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-		ImageButton.BorderColor3 = Color3.fromRGB(36, 36, 36)
-		ImageButton.BorderSizePixel = 2
-		ImageButton.Position = UDim2.new(3.3499999, 0, 0.0799999982, 0)
-		ImageButton.Size = UDim2.new(0, 20, 0, 20)
-		ImageButton.AutoButtonColor = false
-
-		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-		UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
-		UIGradient.Parent = ImageButton
-
-		ImageButton.MouseButton1Click:Connect(function()
-			if state == false then
-				state = true
-				ImageButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
-			elseif state == true then
-				state = false
-				ImageButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-			end
-			pcall(callback, state)
-		end)
-	end
-
-	function TabsE:CreateTextBox(tab, placeholder, text, callback)
-		callback = callback or function () end
-
-		local TextBox = Instance.new("TextBox")
-
-		TextBox.Parent = tab.Tab
-		TextBox.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		TextBox.BackgroundTransparency = 0.200
-		TextBox.BorderSizePixel = 0
-		TextBox.Size = UDim2.new(0, 200, 0, 50)
-		TextBox.Font = Enum.Font.Code
-		TextBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-		TextBox.PlaceholderText = placeholder
-		TextBox.Text = ""
-		TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextBox.TextSize = 14.000
-		TextBox.TextStrokeTransparency = 0.500
-		TextBox.TextWrapped = true
-		TextBox.TextTransparency = 0.300
-
-		TextBox.FocusLost:Connect(function()
-			text = TextBox.Text
-			pcall(callback, text)
-		end)
-	end
-
-	function TabsE:CreateSlider(tab, name, minvalue, maxvalue, callback)
-		callback = callback or function () end
-
-		local Value
-		local mouse = game.Players.LocalPlayer:GetMouse()
-		local uis = game:GetService("UserInputService")
-
-		local TextLabelD = Instance.new("TextLabel")
-		local ImageButtonXD = Instance.new("ImageButton")
-		local ImageLabelDFDFD = Instance.new("ImageLabel")
-		local UIGradientXDED = Instance.new("UIGradient")
-
-		local TextLabelXDX = Instance.new("TextLabel")
-
-		--Properties:
-
-		TextLabelXDX.Parent = ImageButtonXD
-		TextLabelXDX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabelXDX.BackgroundTransparency = 1.000
-		TextLabelXDX.Position = UDim2.new(0.0333333351, 0, 0, 0)
-		TextLabelXDX.Size = UDim2.new(0, 145, 0, 20)
-		TextLabelXDX.Font = Enum.Font.Code
-		TextLabelXDX.Text = "0"
-		TextLabelXDX.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabelXDX.TextSize = 14.000
-		TextLabelXDX.TextWrapped = true
-		TextLabelXDX.TextXAlignment = Enum.TextXAlignment.Left
-
-		TextLabelD.Parent = tab.Tab
-		TextLabelD.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		TextLabelD.BackgroundTransparency = 1.000
-		TextLabelD.BorderColor3 = Color3.fromRGB(36, 36, 36)
-		TextLabelD.BorderSizePixel = 0
-		TextLabelD.Position = UDim2.new(0, 0, 0.189873606, 0)
-		TextLabelD.Size = UDim2.new(0, 100, 0, 205)
-		TextLabelD.Font = Enum.Font.Code
-		TextLabelD.Text = name
-		TextLabelD.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabelD.TextSize = 14.000
-		TextLabelD.TextXAlignment = Enum.TextXAlignment.Left
-
-		ImageButtonXD.Parent = TextLabelD
-		ImageButtonXD.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-		ImageButtonXD.BorderColor3 = Color3.fromRGB(24, 24, 24)
-		ImageButtonXD.BorderSizePixel = 2
-		ImageButtonXD.Position = UDim2.new(2.04999995, 0, 0.0799999982, 0)
-		ImageButtonXD.Size = UDim2.new(0, 150, 0, 20)
-		ImageButtonXD.AutoButtonColor = false
-
-		ImageLabelDFDFD.Parent = ImageButtonXD
-		ImageLabelDFDFD.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
-		ImageLabelDFDFD.Size = UDim2.new(0, 0, 0, 20)
-
-		UIGradientXDED.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-		UIGradientXDED.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
-		UIGradientXDED.Parent = ImageLabelDFDFD
-
-		ImageButtonXD.MouseButton1Down:Connect(function()
-			Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue)) or 0
-			pcall(function()
-				callback(Value)
+			TextButton2.MouseEnter:Connect(function()
+				TextButton2.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
 			end)
-			ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
-			
-			local moveconnection
-			local releaseconnection
-			
-			moveconnection = mouse.Move:Connect(function()
-				TextLabelXDX.Text = Value
-				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue))
+
+			TextButton2.MouseLeave:Connect(function()
+				TextButton2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			end)
+
+			TextButton2.MouseButton1Click:Connect(function()
+				pcall(callback)
+			end)
+		end
+
+		function TabButtons:CreateToggle(name, state, callback)
+			callback = callback or function () end	
+
+			local TextLabel3 = Instance.new("TextLabel")
+			local ImageButton = Instance.new("ImageButton")
+			local UIGradient = Instance.new("UIGradient")
+
+			TextLabel3.Parent = Tab
+			TextLabel3.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel3.BackgroundTransparency = 1.000
+			TextLabel3.BorderColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel3.BorderSizePixel = 0
+			TextLabel3.Position = UDim2.new(0, 0, 0.189873606, 0)
+			TextLabel3.Size = UDim2.new(0, 100, 0, 205)
+			TextLabel3.Font = Enum.Font.Code
+			TextLabel3.Text = name
+			TextLabel3.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel3.TextSize = 14.000
+			TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
+
+			ImageButton.Parent = TextLabel3
+			ImageButton.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+			ImageButton.BorderColor3 = Color3.fromRGB(36, 36, 36)
+			ImageButton.BorderSizePixel = 2
+			ImageButton.Position = UDim2.new(3.3499999, 0, 0.0799999982, 0)
+			ImageButton.Size = UDim2.new(0, 20, 0, 20)
+			ImageButton.AutoButtonColor = false
+
+			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+			UIGradient.Parent = ImageButton
+
+			ImageButton.MouseButton1Click:Connect(function()
+				if state == false then
+					state = true
+					ImageButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
+				elseif state == true then
+					state = false
+					ImageButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+				end
+				pcall(callback, state)
+			end)
+		end
+
+		function TabButtons:CreateTextBox(placeholder, text, callback)
+			callback = callback or function () end
+
+			local TextBox = Instance.new("TextBox")
+
+			TextBox.Parent = Tab
+			TextBox.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextBox.BackgroundTransparency = 0.200
+			TextBox.BorderSizePixel = 0
+			TextBox.Size = UDim2.new(0, 200, 0, 50)
+			TextBox.Font = Enum.Font.Code
+			TextBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+			TextBox.PlaceholderText = placeholder
+			TextBox.Text = ""
+			TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextBox.TextSize = 14.000
+			TextBox.TextStrokeTransparency = 0.500
+			TextBox.TextWrapped = true
+			TextBox.TextTransparency = 0.300
+
+			TextBox.FocusLost:Connect(function()
+				text = TextBox.Text
+				pcall(callback, text)
+			end)
+		end
+
+		function TabButtons:CreateSlider(name, minvalue, maxvalue, callback)
+			callback = callback or function () end
+
+			local Value
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")
+
+			local TextLabelD = Instance.new("TextLabel")
+			local ImageButtonXD = Instance.new("ImageButton")
+			local ImageLabelDFDFD = Instance.new("ImageLabel")
+			local UIGradientXDED = Instance.new("UIGradient")
+
+			local TextLabelXDX = Instance.new("TextLabel")
+
+			--Properties:
+
+			TextLabelXDX.Parent = ImageButtonXD
+			TextLabelXDX.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabelXDX.BackgroundTransparency = 1.000
+			TextLabelXDX.Position = UDim2.new(0.0333333351, 0, 0, 0)
+			TextLabelXDX.Size = UDim2.new(0, 145, 0, 20)
+			TextLabelXDX.Font = Enum.Font.Code
+			TextLabelXDX.Text = "0"
+			TextLabelXDX.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabelXDX.TextSize = 14.000
+			TextLabelXDX.TextWrapped = true
+			TextLabelXDX.TextXAlignment = Enum.TextXAlignment.Left
+
+			TextLabelD.Parent = Tab
+			TextLabelD.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabelD.BackgroundTransparency = 1.000
+			TextLabelD.BorderColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabelD.BorderSizePixel = 0
+			TextLabelD.Position = UDim2.new(0, 0, 0.189873606, 0)
+			TextLabelD.Size = UDim2.new(0, 100, 0, 205)
+			TextLabelD.Font = Enum.Font.Code
+			TextLabelD.Text = name
+			TextLabelD.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabelD.TextSize = 14.000
+			TextLabelD.TextXAlignment = Enum.TextXAlignment.Left
+
+			ImageButtonXD.Parent = TextLabelD
+			ImageButtonXD.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			ImageButtonXD.BorderColor3 = Color3.fromRGB(24, 24, 24)
+			ImageButtonXD.BorderSizePixel = 2
+			ImageButtonXD.Position = UDim2.new(2.04999995, 0, 0.0799999982, 0)
+			ImageButtonXD.Size = UDim2.new(0, 150, 0, 20)
+			ImageButtonXD.AutoButtonColor = false
+
+			ImageLabelDFDFD.Parent = ImageButtonXD
+			ImageLabelDFDFD.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
+			ImageLabelDFDFD.Size = UDim2.new(0, 0, 0, 20)
+
+			UIGradientXDED.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+			UIGradientXDED.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+			UIGradientXDED.Parent = ImageLabelDFDFD
+
+			ImageButtonXD.MouseButton1Down:Connect(function()
+				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue)) or 0
 				pcall(function()
 					callback(Value)
 				end)
 				ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
-			end)
-			releaseconnection = uis.InputEnded:Connect(function(Mouse)
-				if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+
+				local moveconnection
+				local releaseconnection
+
+				moveconnection = mouse.Move:Connect(function()
+					TextLabelXDX.Text = Value
 					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue))
 					pcall(function()
 						callback(Value)
 					end)
 					ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
-					moveconnection:Disconnect()
-					releaseconnection:Disconnect()
-				end
-			end)
-		end)		
+				end)
+				releaseconnection = uis.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(minvalue))
+						pcall(function()
+							callback(Value)
+						end)
+						ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)		
+		end
+
+		return TabButtons
 	end
 
 	return TabsE
