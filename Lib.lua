@@ -442,19 +442,6 @@ function Library:Create(Name)
 				return Value
 			end
 
-			function slider:SetValue(number)
-				number = number  or ""
-
-				if number == "" or number > maxvalue or number < minvalue then return end
-				
-				TextLabelXDX.Text = Value
-				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * ImageLabelDFDFD.AbsoluteSize.X) + tonumber(number))
-				pcall(function()
-					callback(Value)
-				end)
-				ImageLabelDFDFD.Size = UDim2.new(0, math.clamp(mouse.X - ImageLabelDFDFD.AbsolutePosition.X, 0, 150), 0, 20)
-			end
-
 			return slider
 		end
 
