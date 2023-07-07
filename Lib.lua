@@ -299,6 +299,8 @@ function Library:Create(Name)
 
 			local TextBox = Instance.new("TextBox")
 
+			local textBox = {}
+
 			TextBox.Parent = Tab
 			TextBox.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 			TextBox.BackgroundTransparency = 0.200
@@ -313,11 +315,17 @@ function Library:Create(Name)
 			TextBox.TextStrokeTransparency = 0.500
 			TextBox.TextWrapped = true
 			TextBox.TextTransparency = 0.300
-
+			
 			TextBox.FocusLost:Connect(function()
 				local text = TextBox.Text
 				pcall(callback, text)
 			end)
+
+			function textBox:GetText()
+				return TextBox.Text
+			end
+			
+			return textBox
 		end
 
 		function TabButtons:CreateSlider(name, minvalue, maxvalue, callback)
