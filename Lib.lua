@@ -658,6 +658,8 @@ function Library:Create(Name)
 					pcall(callback, option)
 				end
 			end
+
+			return dropdown
 		end
 
 		return TabButtons
