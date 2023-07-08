@@ -505,7 +505,11 @@ function Library:Create(Name)
 			end)
 
 			function slider:GetValue()
-				return Value
+				if Value == nil then
+					return minvalue
+				else
+					return Value
+				end
 			end
 
 			return slider
