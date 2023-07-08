@@ -1,7 +1,7 @@
 local Library = {} 
 
 function Library:Create(Name)
-	
+
 	local Closed = false
 
 	if game.CoreGui:FindFirstChild(Name) then
@@ -30,7 +30,7 @@ function Library:Create(Name)
 	Title.BorderColor3 = Color3.fromRGB(24, 24, 24)
 	Title.BorderSizePixel = 0
 	Title.Size = UDim2.new(0, 400, 0, 40)
-	
+
 	local CloseButton = Instance.new("ImageButton")
 
 	CloseButton.Parent = Title
@@ -275,11 +275,11 @@ function Library:Create(Name)
 
 		function TabButtons:CreateToggle(name, state, callback)
 			callback = callback or function () end	
-		
+
 			local TextLabel3 = Instance.new("TextLabel")
 			local ImageButton = Instance.new("ImageButton")
 			local UIGradient = Instance.new("UIGradient")
-			
+
 			local toggle = {}
 
 			TextLabel3.Parent = Tab
@@ -305,7 +305,7 @@ function Library:Create(Name)
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = ImageButton
-			
+
 			local function Update(changestate)
 				if changestate then
 					if state == false then
@@ -323,7 +323,7 @@ function Library:Create(Name)
 					end
 				end
 			end
-			
+
 			Update(false)
 
 			ImageButton.MouseButton1Click:Connect(function()
@@ -339,9 +339,9 @@ function Library:Create(Name)
 				bool = bool  or ""
 
 				if bool ~= false and bool ~= true then return end
-				
+
 				state = bool
-				
+
 				Update(false)
 				pcall(callback, state)
 			end
@@ -356,7 +356,7 @@ function Library:Create(Name)
 			local TextBox = Instance.new("TextBox")
 			local Frame = Instance.new("Frame")
 			local UIGradient = Instance.new("UIGradient")
-			
+
 			local textBox = {}
 
 			TextLabel.Parent = Tab
@@ -398,7 +398,7 @@ function Library:Create(Name)
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = Frame
-			
+
 			TextBox.FocusLost:Connect(function()
 				local text = TextBox.Text
 				pcall(callback, text)
@@ -410,12 +410,12 @@ function Library:Create(Name)
 
 			function textBox:SetText(text)
 				text = text  or ""
-				
+
 				TextBox.Text = text
-				
+
 				pcall(callback, text)
 			end
-			
+
 			return textBox
 		end
 
@@ -514,14 +514,14 @@ function Library:Create(Name)
 
 			return slider
 		end
-		
+
 		function TabButtons:CreateDropdown(name, options, callback)
 			callback = callback or function () end
-			
+
 			local option
 
 			local dropdown = {}
-		
+
 			local TextLabel = Instance.new("TextLabel")
 			local Frame = Instance.new("Frame")
 			local UIGradient = Instance.new("UIGradient")
@@ -596,6 +596,20 @@ function Library:Create(Name)
 			UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 3)
 			UIGridLayout.CellSize = UDim2.new(0, 100, 0, 25)
 			
+			local function findValue(whichArray, itemName)
+
+				for currentIndex = 1, #whichArray do
+
+					if whichArray[currentIndex] == itemName then
+
+						return currentIndex
+
+					end
+
+				end
+
+			end
+
 			ImageButton.MouseButton1Down:Connect(function()
 				if Frame_2.Visible then
 					Frame_2.Visible = false
@@ -603,10 +617,11 @@ function Library:Create(Name)
 					Frame_2.Visible = true
 				end
 			end)
-			
+
 			for i,v in pairs(options) do
 				local TextButton = Instance.new("TextButton")
 				TextButton.Parent = Frame_2
+				TextButton.Name = v
 				TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 				TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
 				TextButton.BorderSizePixel = 2
@@ -618,13 +633,13 @@ function Library:Create(Name)
 				TextButton.TextSize = 14.000
 				TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 				TextButton.TextWrapped = true
-				
+
 				local UIGradient_3 = Instance.new("UIGradient")
-				
+
 				UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 				UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 				UIGradient_3.Parent = TextButton
-				
+
 				TextButton.MouseEnter:Connect(function()
 					TextButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
 				end)
@@ -636,14 +651,14 @@ function Library:Create(Name)
 				TextButton.MouseButton1Click:Connect(function()
 					option = TextButton.Text
 					TextLabel_2.Text = option
-					
+
 					if Frame_2.Visible then
 						Frame_2.Visible = false
 					end
-					
+
 					pcall(callback, option)
 				end)
-				
+
 				Frame_2.Size += UDim2.new(0, 0, 0, 25)
 			end
 
@@ -664,9 +679,10 @@ function Library:Create(Name)
 					return
 				else
 					table.insert(options, Option)
-					
+
 					local TextButton = Instance.new("TextButton")
 					TextButton.Parent = Frame_2
+					TextButton.Name = Option
 					TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 					TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
 					TextButton.BorderSizePixel = 2
@@ -678,45 +694,55 @@ function Library:Create(Name)
 					TextButton.TextSize = 14.000
 					TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 					TextButton.TextWrapped = true
-					
+
 					local UIGradient_3 = Instance.new("UIGradient")
-					
+
 					UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 					UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 					UIGradient_3.Parent = TextButton
-					
+
 					TextButton.MouseEnter:Connect(function()
 						TextButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
 					end)
-	
+
 					TextButton.MouseLeave:Connect(function()
 						TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 					end)
-	
+
 					TextButton.MouseButton1Click:Connect(function()
 						option = TextButton.Text
 						TextLabel_2.Text = option
-						
+
 						if Frame_2.Visible then
 							Frame_2.Visible = false
 						end
-						
+
 						pcall(callback, option)
 					end)
-					
+
 					Frame_2.Size += UDim2.new(0, 0, 0, 25)
 				end
 			end
 
 			function dropdown:RemoveOption(Option)
-				if table.find(options, Option) then
-					table.remove(options, table.find(options, Option))
-
+				local FindOption = findValue(options, Option)
+				
+				print(FindOption)
+				
+				if FindOption then
+					table.remove(options, FindOption)
+					
+					if option == Option then
+						option = nil
+						TextLabel_2.Text = ""
+					end
+					
 					for i,v in pairs(Frame_2:GetChildren()) do
-						if v.Text == Option then
+						if v.Name == Option then
 							v:Destroy()
 						end
 					end
+					
 					Frame_2.Size -= UDim2.new(0, 0, 0, 25)
 				end
 			end
@@ -726,7 +752,7 @@ function Library:Create(Name)
 
 		return TabButtons
 	end
-	
+
 	return TabsE
 
 end
