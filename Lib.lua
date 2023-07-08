@@ -86,7 +86,7 @@ function Library:Create(Name)
 	TabButtons.BorderColor3 = Color3.fromRGB(42, 42, 42)
 	TabButtons.BorderSizePixel = 0
 	TabButtons.Position = UDim2.new(0.0149999997, 0, 0.172413796, 0)
-	TabButtons.Size = UDim2.new(0, 394, 0, 35)
+	TabButtons.Size = UDim2.new(0, 388, 0, 35)
 
 	local UIGridLayout = Instance.new("UIGridLayout")
 
@@ -163,6 +163,11 @@ function Library:Create(Name)
 		TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 		TextButton.TextSize = 14.000
 		TextButton.Text = Name
+		
+		local UIGradient_365 = Instance.new("UIGradient")
+
+		UIGradient_365.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+		UIGradient_365.Parent = TextButton
 
 		local TabName = Instance.new("Frame")
 		local Tab = Instance.new("ScrollingFrame")
@@ -257,7 +262,6 @@ function Library:Create(Name)
 			TextButton.TextWrapped = true
 
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = TextButton
 
 			TextButton.MouseEnter:Connect(function()
@@ -303,7 +307,6 @@ function Library:Create(Name)
 			ImageButton.AutoButtonColor = false
 
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = ImageButton
 
 			local function Update(changestate)
@@ -396,7 +399,6 @@ function Library:Create(Name)
 			Frame.Size = UDim2.new(0, 100, 0, 20)
 
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = Frame
 
 			TextBox.FocusLost:Connect(function()
@@ -459,7 +461,6 @@ function Library:Create(Name)
 			ImageLabelSex.Size = UDim2.new(0, 0, 0, 20)
 
 			UIGradientBru.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradientBru.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradientBru.Parent = ImageLabelSex
 
 			TextLabel_2.Parent = ImageButtonBalls
@@ -475,7 +476,6 @@ function Library:Create(Name)
 			TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
 
 			UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient_2.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient_2.Parent = ImageButtonBalls
 
 			local slider = {}
@@ -542,6 +542,7 @@ function Library:Create(Name)
 			TextLabel.Text = name
 			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextLabel.TextSize = 14.000
+			TextLabel.ZIndex = 2
 
 			Frame.Parent = TextLabel
 			Frame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
@@ -549,9 +550,9 @@ function Library:Create(Name)
 			Frame.BorderSizePixel = 2
 			Frame.Position = UDim2.new(0, 0, 1.24000001, 0)
 			Frame.Size = UDim2.new(0, 100, 0, 25)
-
+			Frame.ZIndex = 2
+			
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient.Parent = Frame
 
 			ImageButton.Parent = Frame
@@ -563,6 +564,7 @@ function Library:Create(Name)
 			ImageButton.Rotation = 180.000
 			ImageButton.Size = UDim2.new(0, 12, 0, 12)
 			ImageButton.Image = "rbxassetid://6798365555"
+			ImageButton.ZIndex = 2
 
 			TextLabel_2.Parent = Frame
 			TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -577,6 +579,7 @@ function Library:Create(Name)
 			TextLabel_2.TextSize = 14.000
 			TextLabel_2.TextWrapped = true
 			TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+			TextLabel_2.ZIndex = 2
 
 			Frame_2.Parent = Frame
 			Frame_2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
@@ -586,9 +589,9 @@ function Library:Create(Name)
 			Frame_2.Position = UDim2.new(-0, 0, 1.10000002, 0)
 			Frame_2.Size = UDim2.new(0, 100, 0, 0)
 			Frame_2.Visible = false
+			Frame_2.ZIndex = 2
 
 			UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-			UIGradient_2.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 			UIGradient_2.Parent = Frame_2
 
 			UIGridLayout.Parent = Frame_2
@@ -633,11 +636,11 @@ function Library:Create(Name)
 				TextButton.TextSize = 14.000
 				TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 				TextButton.TextWrapped = true
+				TextButton.ZIndex = 2
 
 				local UIGradient_3 = Instance.new("UIGradient")
 
 				UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-				UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 				UIGradient_3.Parent = TextButton
 
 				TextButton.MouseEnter:Connect(function()
@@ -694,11 +697,11 @@ function Library:Create(Name)
 					TextButton.TextSize = 14.000
 					TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 					TextButton.TextWrapped = true
+					TextButton.ZIndex = 2
 
 					local UIGradient_3 = Instance.new("UIGradient")
 
 					UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-					UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
 					UIGradient_3.Parent = TextButton
 
 					TextButton.MouseEnter:Connect(function()
@@ -752,7 +755,7 @@ function Library:Create(Name)
 
 		return TabButtons
 	end
-
+	
 	return TabsE
 
 end
