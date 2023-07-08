@@ -17,7 +17,10 @@ local Toggle = Tab:CreateToggle(name: string, state: bool, callback: function)
 local TextBox = Tab:CreateTextBox(name: string, placeholder: string, callback: function)
 
 -- Create Slider
-local Slider = Tab:CreateSlider(name: string, minvalue: number, maxvalue: number, callback:function)
+local Slider = Tab:CreateSlider(name: string, minvalue: number, maxvalue: number, callback: function)
+
+-- Create Dropdown
+local Dropdown = Tab:CreateDropdown(name: string, options: table, callback: function)
 
 -- Other
 
@@ -31,6 +34,12 @@ Text:SetText(text: string)
 
 -- Slider
 local Value = Slider:GetValue() -- returns Value
+
+-- Dropdown
+local Option = Dropdown:GetOption()
+Dropdown:SetOption(option: string)
+Dropdown:AddOption(option: string)
+Dropdown:RemoveOption(option: string)
 
 -- Examples:
 
@@ -63,6 +72,9 @@ local Slider = Tab:CreateSlider("Slider1", 0, 100, function(value)
     print(value)
 end)
 
+-- Create Dropdown
+local Dropdown = Tab:CreateDropdown("Dropdown1", {"Option1", "Option2", "Option3"}, callback: function)
+
 -- Other
 local Button2 = Tab:CreateButton("Button2", function()
     print(Toggle:GetState())
@@ -70,5 +82,13 @@ end)
 
 local Button3 = Tab:CreateButton("Button3", function()
     print(Toggle:SetState(true))
+end)
+
+local Button4 = Tab:CreateButton("Button4", function()
+    Dropdown:AddOption("Option4")
+end)
+
+local Button5 = Tab:CreateButton("Button5", function()
+    Dropdown:RemoveOption("Option3")
 end)
 
