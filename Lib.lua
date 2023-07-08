@@ -505,14 +505,141 @@ function Library:Create(Name)
 			end)
 
 			function slider:GetValue()
-				if Value == nil then
-					return minvalue
-				else
-					return Value
-				end
+				return Value
 			end
 
 			return slider
+		end
+		
+		function TabButtons:CreateDropdown(name, options, callback)
+			callback = callback or function () end
+			
+			local option
+		
+			local TextLabel = Instance.new("TextLabel")
+			local Frame = Instance.new("Frame")
+			local UIGradient = Instance.new("UIGradient")
+			local ImageButton = Instance.new("ImageButton")
+			local TextLabel_2 = Instance.new("TextLabel")
+			local Frame_2 = Instance.new("Frame")
+			local UIGradient_2 = Instance.new("UIGradient")
+			local UIGridLayout = Instance.new("UIGridLayout")
+
+			TextLabel.Parent = Tab
+			TextLabel.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel.BackgroundTransparency = 1.000
+			TextLabel.BorderColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel.BorderSizePixel = 0
+			TextLabel.Position = UDim2.new(0, 0, 0.189873606, 0)
+			TextLabel.Size = UDim2.new(0, 100, 0, 205)
+			TextLabel.Font = Enum.Font.Code
+			TextLabel.Text = name
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 14.000
+
+			Frame.Parent = TextLabel
+			Frame.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			Frame.BorderColor3 = Color3.fromRGB(24, 24, 24)
+			Frame.BorderSizePixel = 2
+			Frame.Position = UDim2.new(0, 0, 1.24000001, 0)
+			Frame.Size = UDim2.new(0, 100, 0, 25)
+
+			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+			UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+			UIGradient.Parent = Frame
+
+			ImageButton.Parent = Frame
+			ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ImageButton.BackgroundTransparency = 1.000
+			ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ImageButton.BorderSizePixel = 0
+			ImageButton.Position = UDim2.new(0.810000002, 0, 0.239999995, 0)
+			ImageButton.Rotation = 180.000
+			ImageButton.Size = UDim2.new(0, 12, 0, 12)
+			ImageButton.Image = "rbxassetid://6798365555"
+
+			TextLabel_2.Parent = Frame
+			TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel_2.BackgroundTransparency = 1.000
+			TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			TextLabel_2.BorderSizePixel = 0
+			TextLabel_2.Position = UDim2.new(0.0466668718, 0, 0, 0)
+			TextLabel_2.Size = UDim2.new(0, 65, 0, 25)
+			TextLabel_2.Font = Enum.Font.Code
+			TextLabel_2.Text = ""
+			TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel_2.TextSize = 14.000
+			TextLabel_2.TextWrapped = true
+			TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+
+			Frame_2.Parent = Frame
+			Frame_2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			Frame_2.BackgroundTransparency = 1.000
+			Frame_2.BorderColor3 = Color3.fromRGB(24, 24, 24)
+			Frame_2.BorderSizePixel = 2
+			Frame_2.Position = UDim2.new(-0, 0, 1.10000002, 0)
+			Frame_2.Size = UDim2.new(0, 100, 0, 0)
+			Frame_2.Visible = false
+
+			UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+			UIGradient_2.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+			UIGradient_2.Parent = Frame_2
+
+			UIGridLayout.Parent = Frame_2
+			UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 3)
+			UIGridLayout.CellSize = UDim2.new(0, 100, 0, 25)
+			
+			ImageButton.MouseButton1Down:Connect(function()
+				if Frame_2.Visible then
+					Frame_2.Visible = false
+				else
+					Frame_2.Visible = true
+				end
+			end)
+			
+			for i,v in pairs(options) do
+				local TextButton = Instance.new("TextButton")
+				TextButton.Parent = Frame_2
+				TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+				TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
+				TextButton.BorderSizePixel = 2
+				TextButton.Position = UDim2.new(0, 0, 1.24000025, 0)
+				TextButton.Size = UDim2.new(0, 100, 0, 25)
+				TextButton.Font = Enum.Font.Code
+				TextButton.Text = v
+				TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+				TextButton.TextSize = 14.000
+				TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+				TextButton.TextWrapped = true
+				
+				local UIGradient_3 = Instance.new("UIGradient")
+				
+				UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+				UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+				UIGradient_3.Parent = TextButton
+				
+				TextButton.MouseEnter:Connect(function()
+					TextButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
+				end)
+
+				TextButton.MouseLeave:Connect(function()
+					TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+				end)
+
+				TextButton.MouseButton1Click:Connect(function()
+					option = TextButton.Text
+					TextLabel_2.Text = option
+					
+					if Frame_2.Visible then
+						Frame_2.Visible = false
+					end
+					
+					pcall(callback, option)
+				end)
+				
+				Frame_2.Size += UDim2.new(0, 0, 0, 25)
+			end
 		end
 
 		return TabButtons
