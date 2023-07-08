@@ -77,18 +77,19 @@ function Library:Create(Name)
 	TitleText.TextXAlignment = Enum.TextXAlignment.Left
 	TitleText.Text = Name
 
-	local TabButtons = Instance.new("Frame")
+	local TabButtons = Instance.new("ScrollingFrame")
+	local UIGridLayout = Instance.new("UIGridLayout")
 
 	TabButtons.Name = "TabButtons"
 	TabButtons.Parent = Frame
-	TabButtons.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	TabButtons.Active = true
+	TabButtons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	TabButtons.BackgroundTransparency = 1.000
-	TabButtons.BorderColor3 = Color3.fromRGB(42, 42, 42)
 	TabButtons.BorderSizePixel = 0
-	TabButtons.Position = UDim2.new(0.0149999997, 0, 0.172413796, 0)
+	TabButtons.Position = UDim2.new(0.0149999997, 0, 0.172000006, 0)
 	TabButtons.Size = UDim2.new(0, 388, 0, 35)
-
-	local UIGridLayout = Instance.new("UIGridLayout")
+	TabButtons.CanvasSize = UDim2.new(0, 0, 1, 0)
+	TabButtons.ScrollBarThickness = 6
 
 	UIGridLayout.Parent = TabButtons
 	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -151,23 +152,22 @@ function Library:Create(Name)
 	Tabs.Name = "Tabs"
 
 	function TabsE:Create(Name)
-		local TextButton = Instance.new('TextButton')
+		local TextButton = Instance.new("TextButton")
+		local UIGradient = Instance.new("UIGradient")
+		
 		TextButton.Parent = TabButtons
 		TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 		TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
-		TextButton.BorderSizePixel = 2
-		TextButton.Position = UDim2.new(0, 0, 0.00742892548, 0)
-		TextButton.Size = UDim2.new(0, 131, 0, 32)
-		TextButton.AutoButtonColor = false
+		TextButton.BorderSizePixel = 0
+		TextButton.Position = UDim2.new(0.0370014645, 0, 0.0285714287, 0)
+		TextButton.Size = UDim2.new(0, 66, 0, 35)
 		TextButton.Font = Enum.Font.Code
 		TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 		TextButton.TextSize = 14.000
 		TextButton.Text = Name
-		
-		local UIGradient_365 = Instance.new("UIGradient")
 
-		UIGradient_365.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
-		UIGradient_365.Parent = TextButton
+		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+		UIGradient.Parent = TextButton
 
 		local TabName = Instance.new("Frame")
 		local Tab = Instance.new("ScrollingFrame")
@@ -785,8 +785,6 @@ function Library:Create(Name)
 
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 			UIGradient.Parent = TextButton
-
-			local keyBind = {}
 			
 			local keybindtoggle = false
 			TextButton.MouseButton1Click:Connect(function()
@@ -823,19 +821,6 @@ function Library:Create(Name)
 					end
 				end
 			end)
-
-			function keyBind:GetKeybind()
-				return keybind
-			end
-
-			function keyBind:SetKeybind(KEYbind)
-				if keybindtoggle then return end
-				
-				keybind = KEYbind
-				TextButton.Text = "Keybind: "..keybind
-			end
-
-			return keyBind
 		end
 
 		return TabButtons
