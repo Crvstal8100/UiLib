@@ -730,8 +730,6 @@ function Library:Create(Name)
 			function dropdown:RemoveOption(Option)
 				local FindOption = findValue(options, Option)
 				
-				print(FindOption)
-				
 				if FindOption then
 					table.remove(options, FindOption)
 					
@@ -751,6 +749,78 @@ function Library:Create(Name)
 			end
 
 			return dropdown
+		end
+		
+		function TabButtons:CreateKeybind(name, keybind, callback)
+			callback = callback or function () end
+			
+			local TextLabel = Instance.new("TextLabel")
+			local TextButton = Instance.new("TextButton")
+			local UIGradient = Instance.new("UIGradient")
+
+			TextLabel.Parent = Tab
+			TextLabel.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel.BackgroundTransparency = 1.000
+			TextLabel.BorderColor3 = Color3.fromRGB(36, 36, 36)
+			TextLabel.BorderSizePixel = 0
+			TextLabel.Position = UDim2.new(0, 0, 0.189873606, 0)
+			TextLabel.Size = UDim2.new(0, 100, 0, 205)
+			TextLabel.Font = Enum.Font.Code
+			TextLabel.Text = name
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 14.000
+
+			TextButton.Parent = TextLabel
+			TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
+			TextButton.BorderSizePixel = 2
+			TextButton.Position = UDim2.new(0, 0, 1.27999997, 0)
+			TextButton.Size = UDim2.new(0, 100, 0, 20)
+			TextButton.Font = Enum.Font.Code
+			TextButton.Text = "Keybind: "..keybind
+			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextButton.TextSize = 14.000
+			TextButton.TextStrokeTransparency = 0.000
+			TextButton.TextWrapped = true
+
+			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+			UIGradient.Parent = TextButton
+			
+			local keybindtoggle = false
+			TextButton.MouseButton1Click:Connect(function()
+				if keybindtoggle == false then
+					keybindtoggle = true
+					TextButton.Text = "..."
+					local CheckKeyPress
+					CheckKeyPress = UIS.InputBegan:Connect(function(input, gpe)
+						if gpe then return end
+						
+						if input.UserInputType == Enum.UserInputType.Keyboard then
+							TextButton.Text = "Keybind: "..input.KeyCode.Name
+							keybind = input.KeyCode.Name
+							keybindtoggle = false
+							CheckKeyPress:Disconnect()
+						else
+							TextButton.Text = "Keybind: Unknown"
+							CheckKeyPress:Disconnect()
+						end
+					end)
+				else
+					keybindtoggle = false
+				end
+			end)
+			
+			UIS.InputBegan:Connect(function(input, gpe)
+				if gpe then return end
+				
+				if keybindtoggle then return end
+				
+				if input.UserInputType == Enum.UserInputType.Keyboard then
+					if input.KeyCode.Name == keybind then
+						pcall(callback, keybind)
+					end
+				end
+			end)
 		end
 
 		return TabButtons
