@@ -22,6 +22,10 @@ local Slider = Tab:CreateSlider(name: string, minvalue: number, maxvalue: number
 -- Create Dropdown
 local Dropdown = Tab:CreateDropdown(name: string, options: table, callback: function)
 
+-- Create Keybind
+local Keybind = Tab:CreateKeybind(name: string, keybind: string, callback: function)
+
+                        
 -- Other
 
 -- Toggle
@@ -40,6 +44,10 @@ local Option = Dropdown:GetOption()
 Dropdown:SetOption(option: string)
 Dropdown:AddOption(option: string)
 Dropdown:RemoveOption(option: string)
+
+-- Keybind
+local Keybind = Keybind:GetKeybind()
+Keybind:SetKeybind(keybind: string)
 
 -- Examples:
 
