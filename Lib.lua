@@ -4,6 +4,10 @@ function Library:Create(Name)
 	
 	local Closed = false
 
+	if game.CoreGui:FindFirstChild(Name) then
+		game.CoreGui:FindFirstChild(Name):Destroy()
+	end
+
 	local CsgoFunny = Instance.new("ScreenGui")
 
 	CsgoFunny.Name = Name
@@ -515,6 +519,8 @@ function Library:Create(Name)
 			callback = callback or function () end
 			
 			local option
+
+			local dropdown = {}
 		
 			local TextLabel = Instance.new("TextLabel")
 			local Frame = Instance.new("Frame")
@@ -639,6 +645,18 @@ function Library:Create(Name)
 				end)
 				
 				Frame_2.Size += UDim2.new(0, 0, 0, 25)
+			end
+
+			function dropdown:GetOption()
+				return option
+			end
+
+			function dropdown:SetOption(Option)
+				if table.find(options, Option) then
+					option = Option
+					TextLabel_2.Text = option
+					pcall(callback, option)
+				end
 			end
 		end
 
