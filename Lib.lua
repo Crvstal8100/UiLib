@@ -659,6 +659,68 @@ function Library:Create(Name)
 				end
 			end
 
+			function dropdown:AddOption(Option)
+				if table.find(options, Option) then
+					return
+				else
+					table.insert(options, Option)
+					
+					local TextButton = Instance.new("TextButton")
+					TextButton.Parent = Frame_2
+					TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+					TextButton.BorderColor3 = Color3.fromRGB(24, 24, 24)
+					TextButton.BorderSizePixel = 2
+					TextButton.Position = UDim2.new(0, 0, 1.24000025, 0)
+					TextButton.Size = UDim2.new(0, 100, 0, 25)
+					TextButton.Font = Enum.Font.Code
+					TextButton.Text = Option
+					TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+					TextButton.TextSize = 14.000
+					TextButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+					TextButton.TextWrapped = true
+					
+					local UIGradient_3 = Instance.new("UIGradient")
+					
+					UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
+					UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.50), NumberSequenceKeypoint.new(1.00, 0.50)}
+					UIGradient_3.Parent = TextButton
+					
+					TextButton.MouseEnter:Connect(function()
+						TextButton.BackgroundColor3 = Color3.fromRGB(49, 135, 236)
+					end)
+	
+					TextButton.MouseLeave:Connect(function()
+						TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+					end)
+	
+					TextButton.MouseButton1Click:Connect(function()
+						option = TextButton.Text
+						TextLabel_2.Text = option
+						
+						if Frame_2.Visible then
+							Frame_2.Visible = false
+						end
+						
+						pcall(callback, option)
+					end)
+					
+					Frame_2.Size += UDim2.new(0, 0, 0, 25)
+				end
+			end
+
+			function dropdown:RemoveOption(Option)
+				if table.find(options, Option) then
+					table.remove(options, table.find(options, Option))
+
+					for i,v in pairs(Frame_2:GetChildren()) do
+						if v.Text == Option then
+							v:Destroy()
+						end
+					end
+					Frame_2.Size -= UDim2.new(0, 0, 0, 25)
+				end
+			end
+
 			return dropdown
 		end
 
