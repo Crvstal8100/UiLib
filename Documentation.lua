@@ -81,7 +81,14 @@ local Slider = Tab:CreateSlider("Slider1", 0, 100, function(value)
 end)
 
 -- Create Dropdown
-local Dropdown = Tab:CreateDropdown("Dropdown1", {"Option1", "Option2", "Option3"}, callback: function)
+local Dropdown = Tab:CreateDropdown("Dropdown1", {"Option1", "Option2", "Option3"}, function(option)
+    print(option)
+end)
+
+-- Create Keybind
+local Keybind = Tab:CreateKeybind("Keybind1", "K", function(keybind)
+    print(keybind)
+end)
 
 -- Other
 local Button2 = Tab:CreateButton("Button2", function()
