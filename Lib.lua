@@ -785,6 +785,8 @@ function Library:Create(Name)
 
 			UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(111, 111, 111)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(175, 175, 175))}
 			UIGradient.Parent = TextButton
+
+			local KEYBIND = {}
 			
 			local keybindtoggle = false
 			TextButton.MouseButton1Click:Connect(function()
@@ -821,6 +823,15 @@ function Library:Create(Name)
 					end
 				end
 			end)
+
+			function KEYBIND:GetKeybind()
+				return keybind
+			end
+
+			function KEYBIND:SetKeybind(KEYbind)
+				keybind = KEYbind
+				TextButton.Text = "Keybind: "..keybind
+			end
 		end
 
 		return TabButtons
