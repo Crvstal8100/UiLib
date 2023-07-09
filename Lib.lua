@@ -753,7 +753,7 @@ function Library:Create(Name)
 		
 		function TabButtons:CreateKeybind(name, keybind, callback)
 			callback = callback or function () end
-			
+
 			local TextLabel = Instance.new("TextLabel")
 			local TextButton = Instance.new("TextButton")
 			local UIGradient = Instance.new("UIGradient")
@@ -787,7 +787,7 @@ function Library:Create(Name)
 			UIGradient.Parent = TextButton
 
 			local KEYBIND = {}
-			
+
 			local keybindtoggle = false
 			TextButton.MouseButton1Click:Connect(function()
 				if keybindtoggle == false then
@@ -796,7 +796,7 @@ function Library:Create(Name)
 					local CheckKeyPress
 					CheckKeyPress = UIS.InputBegan:Connect(function(input, gpe)
 						if gpe then return end
-						
+
 						if input.UserInputType == Enum.UserInputType.Keyboard then
 							TextButton.Text = "Keybind: "..input.KeyCode.Name
 							keybind = input.KeyCode.Name
@@ -811,12 +811,12 @@ function Library:Create(Name)
 					keybindtoggle = false
 				end
 			end)
-			
+
 			UIS.InputBegan:Connect(function(input, gpe)
 				if gpe then return end
-				
+
 				if keybindtoggle then return end
-				
+
 				if input.UserInputType == Enum.UserInputType.Keyboard then
 					if input.KeyCode.Name == keybind then
 						pcall(callback, keybind)
@@ -848,28 +848,28 @@ function Library:Notify(title, description, callback)
 	
 	if game.CoreGui:FindFirstChild("Notification") == nil then
 		local Notification = Instance.new("ScreenGui")
+		local Frame = Instance.new("Frame")
+		local UIListLayout = Instance.new("UIListLayout")
+
 		Notification.Name = "Notification"
 		Notification.Parent = game.CoreGui
 		Notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		Notification.DisplayOrder = 1
-		
-		local Frame = Instance.new("Frame")
-		local UIListLayout = Instance.new("UIListLayout")
-		
+
 		Frame.Parent = Notification
 		Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		Frame.BackgroundTransparency = 1.000
 		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame.BorderSizePixel = 0
 		Frame.Position = UDim2.new(0.741999984, 0, 0, 0)
-		Frame.Size = UDim2.new(0, 250, 0, 550)
+		Frame.Size = UDim2.new(0.257625729, 0, 1, 0)
 
 		UIListLayout.Parent = Frame
 		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 		UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
 		UIListLayout.Padding = UDim.new(0, 5)
 	end
-
+	
 	local Frame_2 = Instance.new("Frame")
 	local Frame_3 = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
@@ -881,15 +881,15 @@ function Library:Notify(title, description, callback)
 	Frame_2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 	Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame_2.BorderSizePixel = 0
-	Frame_2.Position = UDim2.new(0.742380559, 0, 0.783402205, 0)
-	Frame_2.Size = UDim2.new(0, 250, 0, 125)
+	Frame_2.Position = UDim2.new(0.742380559, 0, 0.823402226, 0)
+	Frame_2.Size = UDim2.new(0.99999994, 0, 0.206953645, 0)
 
 	Frame_3.Parent = Frame_2
 	Frame_3.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
 	Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame_3.BorderSizePixel = 0
 	Frame_3.Position = UDim2.new(0.0233772993, 0, 0.0442148745, 0)
-	Frame_3.Size = UDim2.new(0, 238, 0, 113)
+	Frame_3.Size = UDim2.new(0.952000022, 0, 0.903999984, 0)
 
 	Title.Name = "Title"
 	Title.Parent = Frame_3
@@ -897,7 +897,7 @@ function Library:Notify(title, description, callback)
 	Title.BackgroundTransparency = 1.000
 	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Title.BorderSizePixel = 0
-	Title.Size = UDim2.new(0, 238, 0, 20)
+	Title.Size = UDim2.new(1, 0, 0.17699115, 0)
 	Title.Font = Enum.Font.Unknown
 	Title.Text = title
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -910,14 +910,15 @@ function Library:Notify(title, description, callback)
 	Description.BackgroundTransparency = 1.000
 	Description.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Description.BorderSizePixel = 0
-	Description.Position = UDim2.new(0.0252100844, 0, 0.17699115, 0)
-	Description.Size = UDim2.new(0, 232, 0, 20)
+	Description.Position = UDim2.new(0.0252100844, 0, 0.176991418, 0)
+	Description.Size = UDim2.new(0.974789917, 0, 0.646018386, 0)
 	Description.Font = Enum.Font.Code
 	Description.Text = description
 	Description.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Description.TextSize = 14.000
 	Description.TextWrapped = true
 	Description.TextXAlignment = Enum.TextXAlignment.Left
+	Description.TextYAlignment = Enum.TextYAlignment.Top
 
 	NoButton.Name = "NoButton"
 	NoButton.Parent = Frame_3
@@ -943,13 +944,13 @@ function Library:Notify(title, description, callback)
 	YesButton.ImageColor3 = Color3.fromRGB(157, 255, 157)
 	
 	YesButton.MouseButton1Down:Connect(function()
-		pcall(callback, "Yes")
+		pcall(callback, "true")
 		
 		Frame_2:Destroy()
 	end)
 	
 	NoButton.MouseButton1Down:Connect(function()
-		pcall(callback, "No")
+		pcall(callback, "false")
 		
 		Frame_2:Destroy()
 	end)
