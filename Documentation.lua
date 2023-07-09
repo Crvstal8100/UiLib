@@ -29,7 +29,7 @@ local Keybind = Tab:CreateKeybind(name: string, keybind: string, callback: funct
 -- Other
 
 -- Notification
-local Notification = Library:Notification(title: string, description: string, callback: function)
+local Notification = Library:Notify(title: string, description: string, callback: function)
             
 -- Toggle
 local State = Toggle:GetState() -- returns State
@@ -94,7 +94,7 @@ local Keybind = Tab:CreateKeybind("Keybind1", "K", function(keybind)
 end)
 
 -- Other
-local Notification = Library:Notification("Notification", "Hello World!", function(answer)
+local Notification = Library:Notify("Notification", "Hello World!", function(answer)
     print(answer)
 end)
               
