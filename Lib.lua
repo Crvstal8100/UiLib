@@ -843,4 +843,116 @@ function Library:Create(Name)
 
 end
 
+function Library:Notify(title, description, callback)
+	callback = callback or function () end
+	
+	if game.CoreGui:FindFirstChild("Notification") == nil then
+		local Notification = Instance.new("ScreenGui")
+		Notification.Name = "Notification"
+		Notification.Parent = game.CoreGui
+		Notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		Notification.DisplayOrder = 1
+		
+		local Frame = Instance.new("Frame")
+		local UIListLayout = Instance.new("UIListLayout")
+		
+		Frame.Parent = Notification
+		Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Frame.BackgroundTransparency = 1.000
+		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Frame.BorderSizePixel = 0
+		Frame.Position = UDim2.new(0.741999984, 0, 0, 0)
+		Frame.Size = UDim2.new(0, 250, 0, 550)
+
+		UIListLayout.Parent = Frame
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+		UIListLayout.Padding = UDim.new(0, 5)
+	end
+
+	local Frame_2 = Instance.new("Frame")
+	local Frame_3 = Instance.new("Frame")
+	local Title = Instance.new("TextLabel")
+	local Description = Instance.new("TextLabel")
+	local NoButton = Instance.new("ImageButton")
+	local YesButton = Instance.new("ImageButton")
+
+	Frame_2.Parent = game.CoreGui:FindFirstChild("Notification"):FindFirstChild("Frame")
+	Frame_2.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+	Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame_2.BorderSizePixel = 0
+	Frame_2.Position = UDim2.new(0.742380559, 0, 0.783402205, 0)
+	Frame_2.Size = UDim2.new(0, 250, 0, 125)
+
+	Frame_3.Parent = Frame_2
+	Frame_3.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+	Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame_3.BorderSizePixel = 0
+	Frame_3.Position = UDim2.new(0.0233772993, 0, 0.0442148745, 0)
+	Frame_3.Size = UDim2.new(0, 238, 0, 113)
+
+	Title.Name = "Title"
+	Title.Parent = Frame_3
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Size = UDim2.new(0, 238, 0, 20)
+	Title.Font = Enum.Font.Unknown
+	Title.Text = title
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextSize = 14.000
+	Title.TextWrapped = true
+
+	Description.Name = "Description"
+	Description.Parent = Frame_3
+	Description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Description.BackgroundTransparency = 1.000
+	Description.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Description.BorderSizePixel = 0
+	Description.Position = UDim2.new(0.0252100844, 0, 0.17699115, 0)
+	Description.Size = UDim2.new(0, 232, 0, 20)
+	Description.Font = Enum.Font.Code
+	Description.Text = description
+	Description.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Description.TextSize = 14.000
+	Description.TextWrapped = true
+	Description.TextXAlignment = Enum.TextXAlignment.Left
+
+	NoButton.Name = "NoButton"
+	NoButton.Parent = Frame_3
+	NoButton.BackgroundColor3 = Color3.fromRGB(255, 67, 67)
+	NoButton.BackgroundTransparency = 1.000
+	NoButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	NoButton.BorderSizePixel = 0
+	NoButton.Position = UDim2.new(0.0252100844, 0, 0.823008835, 0)
+	NoButton.Rotation = 45.000
+	NoButton.Size = UDim2.new(0, 20, 0, 20)
+	NoButton.Image = "rbxassetid://401613236"
+	NoButton.ImageColor3 = Color3.fromRGB(255, 67, 67)
+
+	YesButton.Name = "YesButton"
+	YesButton.Parent = Frame_3
+	YesButton.BackgroundColor3 = Color3.fromRGB(255, 67, 67)
+	YesButton.BackgroundTransparency = 1.000
+	YesButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	YesButton.BorderSizePixel = 0
+	YesButton.Position = UDim2.new(0.138655469, 0, 0.823008835, 0)
+	YesButton.Size = UDim2.new(0, 20, 0, 20)
+	YesButton.Image = "rbxassetid://505845268"
+	YesButton.ImageColor3 = Color3.fromRGB(157, 255, 157)
+	
+	YesButton.MouseButton1Down:Connect(function()
+		pcall(callback, "Yes")
+		
+		Frame_2:Destroy()
+	end)
+	
+	NoButton.MouseButton1Down:Connect(function()
+		pcall(callback, "No")
+		
+		Frame_2:Destroy()
+	end)
+end
+
 return Library
