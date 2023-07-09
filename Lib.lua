@@ -832,6 +832,8 @@ function Library:Create(Name)
 				keybind = KEYbind
 				TextButton.Text = "Keybind: "..keybind
 			end
+
+			return KEYBIND
 		end
 
 		return TabButtons
