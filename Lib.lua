@@ -3,6 +3,7 @@ local Library = {}
 function Library:Create(Name)
 
 	local Closed = false
+	local Minimized = false
 
 	if game.CoreGui:FindFirstChild(Name) then
 		game.CoreGui:FindFirstChild(Name):Destroy()
@@ -45,6 +46,18 @@ function Library:Create(Name)
 	CloseButton.MouseButton1Down:Connect(function()
 		CsgoFunny:Destroy()
 	end)
+
+
+	local MinimizeButton = Instance.new("ImageButton")
+
+	MinimizeButton.Parent = Title
+	MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MinimizeButton.BackgroundTransparency = 1.000
+	MinimizeButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	MinimizeButton.BorderSizePixel = 0
+	MinimizeButton.Position = UDim2.new(0.834999979, 0, 0.100000001, 0)
+	MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+	MinimizeButton.Image = "rbxassetid://11622919444"
 
 	game:GetService("UserInputService").InputBegan:Connect(function(input, gpe)
 		if gpe then return end
@@ -104,7 +117,23 @@ function Library:Create(Name)
 	Buttons.BorderSizePixel = 0
 	Buttons.Position = UDim2.new(0.0149999997, 0, 0.37931034, 0)
 	Buttons.Size = UDim2.new(0, 388, 0, 171)
-
+	
+	MinimizeButton.MouseButton1Down:Connect(function()
+		if Minimized then
+			Minimized = false
+			Buttons.Visible = true
+			TabButtons.Visible = true
+			Frame.Size = UDim2.new(0, 400, 0, 290)
+			MinimizeButton.Image = "rbxassetid://11622919444"
+		else
+			Minimized = true
+			Buttons.Visible = false
+			TabButtons.Visible = false
+			Frame.Size = UDim2.new(0, 400, 0, 40)
+			MinimizeButton.Image = "rbxassetid://12072054746"
+		end
+	end)
+	
 	local UIS = game:GetService("UserInputService")
 	local function dragify(Frame)
 		local dragToggle = nil
